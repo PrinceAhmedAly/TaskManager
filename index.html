@@ -10,12 +10,12 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg-blue-100 h-screen flex items-center justify-center" x-data="loginPage()">
-    <div class="bg-white p-8 rounded shadow-md">
+  <body class="bg-black text-white h-screen flex items-center justify-center" x-data="loginPage()">
+    <div class="bg-gray-600 p-8 rounded shadow-md">
       <h1 class="text-2xl font-bold mb-4">Login</h1>
       <form @submit.prevent="login">
         <div class="mb-4">
-          <label for="username" class="block text-gray-700 font-bold mb-2"
+          <label for="username" class="block text-gray-900 font-bold mb-2"
             >Username</label
           >
           <input
@@ -26,7 +26,7 @@
           />
         </div>
         <div class="mb-4">
-          <label for="password" class="block text-gray-700 font-bold mb-2"
+          <label for="password" class="block text-gray-900 font-bold mb-2"
             >Password</label
           >
           <input
@@ -49,21 +49,8 @@
       src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js"
       defer
     ></script>
-    <script>
-      function loginPage() {
-        return {
-          username: "",
-          password: "",
+    <script src="./src/script.js">
 
-          login() {
-            if (this.username === "root" && this.password === "123456") {
-              window.location.href = "./taskManager.html";
-            } else {
-              alert("Invalid username or password. Please try again.");
-            }
-          },
-        };
-      }
     </script>
   </body>
 </html>

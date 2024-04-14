@@ -68,3 +68,19 @@ function taskManager() {
       },
     };
   }
+
+  // login page function
+  function loginPage() {
+    return {
+      username: "",
+      password: "",
+
+      login() {
+        if (this.username === "root" && this.password === "123456") {
+          window.location.href = "./taskManager.html";
+        } else {
+          alert("Invalid username or password. Please try again.");
+        }
+      },
+    };
+  }
