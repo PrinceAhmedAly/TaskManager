@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager with Apline</title>
+    <!-- tailwind css file -->
+    <link rel="stylesheet" href="./public/style.css" />
+  </head>
+  <!-- alpine js cdn -->
+  <script
+    src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
+    defer
+  ></script>
+
+  <body class="bg-black text-white px-2 md:px-5">
+    <div x-data="taskManager()" class="max-w-lg mx-auto mt-8">
+      <h1 class="text-center text-lg md:text-2xl my-3">
+        Manage your Tasks here
+      </h1>
+      <!-- Add Task Form -->
+      <div class="mb-4">
+        <input
+          x-model="newTask.title"
+          type="text"
+          placeholder="Enter task title"
+          class="w-full rounded py-2 px-3 bg-gray-600"
+        />
+        <textarea
+          x-model="newTask.description"
+          placeholder="Enter task description"
+          class="w-full rounded py-2 px-3 mt-2 bg-gray-600"
+        ></textarea>
+        <div class="flex justify-between">
+          <button
+            @click="addTask()"
+            class="mt-2 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-800 transition-all shadow-md"
+          >
+            Add Task
+          </button>
+
+          <!-- Filter Tasks -->
+          <div class="mt-4">
+            <select
+              x-model="filterOption"
+              class="rounded py-2 px-3 bg-gray-600"
+            >
+              <option value="all">All</option>
+              <option value="completed">Completed</option>
+              <option value="notCompleted">Not Completed</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task List -->
+      <ul>
+        <template x-for="(task, index) in filteredTasks" :key="index">
+          <li
+            class="border rounded p-3 mb-2 flex justify-between"
+            :class="{ 'bg-gray-700 text-white transition-all border-none': task.completed }"
+          >
+            <div class="w-full">
+              <div class="flex justify-between w-full">
+                <div>
+                  <h3 x-text="task.title" class="font-bold"></h3>
+                </div>
+                <div>
+                  <div>
+                    <button
+                      @click="toggleComplete(index)"
+                      class="bg-slate-500 rounded px-2 py-1 text-white"
+                      :class="{ 'text-black ': task.completed }"
+                    >
+                      Done
+                    </button>
+                    <button
+                      @click="editTask(index)"
+                      class="mx-1 bg-green-600 px-2 py-1 rounded"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      @click="deleteTask(index)"
+                      class="bg-red-600 px-2 py-1 rounded"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <p
+                x-text="task.description"
+                class="text-gray-600 w-full break-words text-base"
+              ></p>
+              <p class="text-gray-500 text-xs">Date: <span x-text="task.dueDate"></span></p>
+            </div>
+          </li>
+        </template>
+      </ul>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+    <script src="./src/script.js">
+    </script>
+  </body>
+</html>
