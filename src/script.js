@@ -6,6 +6,7 @@ function taskManager() {
       newTask: {
         title: "",
         description: "",
+        dueDate: null,
       },
       filterOption: "all",
 
@@ -24,15 +25,19 @@ function taskManager() {
             alert('Please enter both task title and description.');
             return;
         }
+        const currentDate = new Date(); // Get the current date and time
+        const formattedDate = currentDate.toISOString().split("T")[0]; // Format date as YYYY-MM-DD
         this.tasks.push({
-            title: this.newTask.title.trim(),
-            description: this.newTask.description.trim(),
-            completed: false,
+          title: this.newTask.title.trim(),
+          description: this.newTask.description.trim(),
+          dueDate: formattedDate, // Set due date to current date
+          completed: false,
         });
         this.saveTasks();
         // reset the inputs fields
         this.newTask.title = "";
         this.newTask.description = "";
+        this.newTask.dueDate = null;
     },
 
       toggleComplete(index) {
