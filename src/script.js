@@ -34,6 +34,7 @@ function taskManager() {
           completed: false,
         });
         this.saveTasks();
+
         // reset the inputs fields
         this.newTask.title = "";
         this.newTask.description = "";
@@ -72,8 +73,8 @@ function taskManager() {
   // login page function
   function loginPage() {
     return {
-      username: "",
-      password: "",
+      username: "root",
+      password: "123456",
 
       login() {
         if (this.username === "root" && this.password === "123456") {
