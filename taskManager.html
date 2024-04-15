@@ -7,14 +7,18 @@
     <!-- tailwind css file -->
     <link rel="stylesheet" href="./public/style.css" />
     <link rel="stylesheet" href="./public/global.css" />
+    <!-- alpine js cdn -->
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
-  <!-- alpine js cdn -->
-  <script
-    src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
-    defer
-  ></script>
 
-  <body class="bg-black text-white px-2 md:px-5">
+  <body class="bg-black text-white px-4 md:px-5">
     <div x-data="taskManager()" class="max-w-lg mx-auto mt-8">
       <h1 class="text-left text-lg font-bold md:text-5xl my-3">
         Manage your Tasks here
@@ -73,19 +77,19 @@
                       class="bg-slate-500 rounded px-2 py-1 text-white"
                       :class="{ 'text-black ': task.completed }"
                     >
-                      Done
+                    <i class="fa-solid fa-check"></i>
                     </button>
                     <button
                       @click="editTask(index)"
                       class="mx-1 bg-green-600 px-2 py-1 rounded"
                     >
-                      Edit
+                    <i class="fa-solid fa-pen"></i>
                     </button>
                     <button
                       @click="deleteTask(index)"
                       class="bg-red-600 px-2 py-1 rounded"
                     >
-                      Delete
+                    <i class="fa-solid fa-trash-can"></i>
                     </button>
                   </div>
                 </div>
@@ -94,6 +98,7 @@
               <p
                 x-text="task.description"
                 class="text-white w-full break-words text-base"
+                :class="{ 'line-through ': task.completed }"
               ></p>
               <p class="text-gray-600  text-xs">Date: <span x-text="task.dueDate"></span></p>
             </div>
@@ -102,10 +107,6 @@
       </ul>
     </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"
-      defer
-    ></script>
     <script src="./src/script.js">
     </script>
   </body>

@@ -22,7 +22,11 @@ function taskManager() {
 
       addTask() {
         if (!this.newTask.title.trim() || !this.newTask.description.trim()) {
-            alert('Please enter both task title and description.');
+            // alert('Please enter both task title and description.');
+            Swal.fire({
+              text: 'please enter task title and description',
+              icon: 'warning', 
+            });
             return;
         }
         const currentDate = new Date(); // Get the current date and time
@@ -58,11 +62,27 @@ function taskManager() {
       },
 
       deleteTask(index) {
-        if (confirm("Are you sure you want to delete this task?")) {
-          this.tasks.splice(index, 1);
-          this.saveTasks();
-        }
-      },
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'You will not be able to recover this task!',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.tasks.splice(index, 1);
+            this.saveTasks();
+            Swal.fire(
+              'Deleted!',
+              'Your task has been deleted.',
+              'success'
+            );
+          }
+        });
+      }
+      ,
 
       saveTasks() {
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
